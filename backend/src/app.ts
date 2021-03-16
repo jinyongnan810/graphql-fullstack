@@ -18,7 +18,7 @@ app.use(json());
 app.use(
   cookieSesion({
     signed: false, // no encryption
-    secure: process.env.NODE_ENV !== "test", // only https
+    secure: false, // only https
   })
 );
 app.use("/graphql", graphqlHTTP({ schema: schema, graphiql: true }));

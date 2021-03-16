@@ -4,14 +4,9 @@ import {
   GraphQLString,
   GraphQLID,
 } from "graphql";
-const UserType = new GraphQLObjectType({
-  name: "User",
-  fields: () => ({
-    id: { type: GraphQLID },
-    email: { type: GraphQLString },
-    password: { type: GraphQLString },
-  }),
-});
+import mutation from "./mutations/Mutation";
+import UserType from "./types/UserType";
+
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -22,7 +17,6 @@ const RootQueryType = new GraphQLObjectType({
         return {
           id: Math.floor(Math.random() * 1000).toString(),
           email: "test@test.com",
-          password: "password",
         };
       },
     },
@@ -30,5 +24,6 @@ const RootQueryType = new GraphQLObjectType({
 });
 const schema = new GraphQLSchema({
   query: RootQueryType,
+  mutation: mutation,
 });
 export default schema;
