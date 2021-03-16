@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 require("express-async-errors");
 import { json } from "body-parser";
 
@@ -10,8 +11,9 @@ import { graphqlHTTP } from "express-graphql";
 import schema from "./schemas/schema";
 
 const app = express();
-app.use("/graphql", graphqlHTTP({ schema: schema, graphiql: true }));
+
 app.set("trust proxy", true); //trust ingress nginx
+app.use(cors());
 app.use(json());
 app.use(
   cookieSesion({
@@ -19,7 +21,7 @@ app.use(
     secure: process.env.NODE_ENV !== "test", // only https
   })
 );
-
+app.use("/graphql", graphqlHTTP({ schema: schema, graphiql: true }));
 app.all("*", async (req, res) => {
   throw new NotFoundError();
 });
