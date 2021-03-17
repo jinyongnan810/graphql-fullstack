@@ -13,7 +13,11 @@ import schema from "./schemas/schema";
 const app = express();
 
 app.set("trust proxy", true); //trust ingress nginx
-app.use(cors());
+var corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(json());
 app.use(
   cookieSesion({
