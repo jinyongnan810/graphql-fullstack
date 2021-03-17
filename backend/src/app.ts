@@ -5,7 +5,7 @@ import { json } from "body-parser";
 
 import cookieSesion from "cookie-session";
 
-import { handleError } from "@jinyongnan810/ticketing-common";
+import { currentUser, handleError } from "@jinyongnan810/ticketing-common";
 import { NotFoundError } from "@jinyongnan810/ticketing-common";
 import { graphqlHTTP } from "express-graphql";
 import schema from "./schemas/schema";
@@ -25,6 +25,7 @@ app.use(
     secure: false, // only https
   })
 );
+app.use(currentUser);
 app.use("/graphql", graphqlHTTP({ schema: schema, graphiql: true }));
 app.all("*", async (req, res) => {
   throw new NotFoundError();

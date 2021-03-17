@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import { app } from "./app";
 const start = async () => {
-  console.log("Auth starting...");
+  console.log("Backend starting...");
   if (!process.env.JWT_KEY) {
     throw new Error("JWT_KEY not set.");
   }

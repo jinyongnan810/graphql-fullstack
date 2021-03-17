@@ -14,6 +14,7 @@ import Signup from "./components/Signup";
 
 const App = () => {
   const [signedIn, setSignedIn] = useState(false);
+
   const link = createHttpLink({
     uri: "http://localhost:4000/graphql",
     credentials: "include",
@@ -25,7 +26,11 @@ const App = () => {
   return (
     <ApolloProvider client={apolloClient}>
       <BrowserRouter>
-        <Header signedIn={signedIn} />
+        <Header
+          signedIn={signedIn}
+          setSignedIn={() => setSignedIn(true)}
+          setSignedOut={() => setSignedIn(false)}
+        />
         <Switch>
           <Route path="/dashboard">
             {!signedIn && <Redirect to="/" />}
