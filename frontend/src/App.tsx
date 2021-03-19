@@ -34,15 +34,15 @@ const App = () => {
         />
         <Switch>
           <Route path="/dashboard">
-            {!signedIn && <Redirect to="/" />}
+            {!signedIn && !loading && <Redirect to="/" />}
             <Dashboard />
           </Route>
           <Route path="/signup">
-            {signedIn && <Redirect to="/dashboard" />}
+            {signedIn && !loading && <Redirect to="/dashboard" />}
             <Signup setSignedIn={setSignedIn} />
           </Route>
           <Route path="/signin">
-            {signedIn && <Redirect to="/dashboard" />}
+            {signedIn && !loading && <Redirect to="/dashboard" />}
             <Signin setSignedIn={setSignedIn} />
           </Route>
           <Route path="/">
