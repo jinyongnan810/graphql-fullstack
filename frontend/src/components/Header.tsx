@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 const userQuery = gql`
   {
@@ -34,6 +34,7 @@ const Header = ({
     if (data?.user.id) {
       setSignedIn();
     }
+    // eslint-disable-next-line
   }, [loading]);
   const [signOut] = useMutation(signOutMutation);
   const onSignout = async () => {
