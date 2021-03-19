@@ -14,6 +14,7 @@ import Signup from "./components/Signup";
 
 const App = () => {
   const [signedIn, setSignedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const link = createHttpLink({
     uri: "http://localhost:4000/graphql",
@@ -29,6 +30,7 @@ const App = () => {
         <Header
           setSignedIn={() => setSignedIn(true)}
           setSignedOut={() => setSignedIn(false)}
+          setLoading={() => setLoading(false)}
         />
         <Switch>
           <Route path="/dashboard">
