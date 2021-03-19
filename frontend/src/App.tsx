@@ -27,7 +27,6 @@ const App = () => {
     <ApolloProvider client={apolloClient}>
       <BrowserRouter>
         <Header
-          signedIn={signedIn}
           setSignedIn={() => setSignedIn(true)}
           setSignedOut={() => setSignedIn(false)}
         />

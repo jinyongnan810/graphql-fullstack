@@ -1,5 +1,4 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const userQuery = gql`
   {
@@ -18,44 +17,41 @@ const signOutMutation = gql`
   }
 `;
 const Header = ({
-  signedIn,
   setSignedIn,
   setSignedOut,
 }: {
-  signedIn: Boolean;
   setSignedIn: Function;
   setSignedOut: Function;
 }) => {
-  const [currentUser, setCurrentUser] = useState({ id: "", email: "" });
-  const { loading, error, data } = useQuery(userQuery);
+  const { client, loading, error, data } = useQuery(userQuery);
   const [signOut] = useMutation(signOutMutation);
   const onSignout = async () => {
     await signOut();
+    await client.clearStore();
     setSignedOut();
   };
-  if (!signedIn) {
-    if (loading) {
-      return <h3>Loading...</h3>;
-    }
-    if (error) {
-      return <h3>Error:{error}</h3>;
-    }
-    if (data.user.id) {
-      setSignedIn();
-      setCurrentUser(data.user);
-    }
+  if (loading) {
+    return <h3>Loading...</h3>;
+  }
+  if (error) {
+    return <h3>Error:{error}</h3>;
+  }
+  if (data.user.id) {
+    setSignedIn();
   }
 
   return (
     <div>
-      {signedIn && <Link to="/dashboard">{currentUser.email}'s Dashboard</Link>}
-      {signedIn && (
-        <Link to="/" onClick={onSignout}>
+      {data.user.email && (
+        <Link to="/dashboard">{data.user.email}'s Dashboard</Link>
+      )}
+      {data.user.email && (
+        <Link to="/" onClick={(e) => onSignout()}>
           Sign Out
         </Link>
       )}
-      {!signedIn && <Link to="/signup">Sign Up</Link>}
-      {!signedIn && <Link to="/signin">Sign In</Link>}
+      {!data.user.email && <Link to="/signup">Sign Up</Link>}
+      {!data.user.email && <Link to="/signin">Sign In</Link>}
     </div>
   );
 };
