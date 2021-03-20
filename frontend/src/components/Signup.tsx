@@ -26,21 +26,41 @@ const Signup = ({ setSignedIn }: { setSignedIn: Function }) => {
     history.push("/dashboard");
   };
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button>Signup</button>
-    </form>
+    <div className="card col-6 p-3 position-absolute top-50 start-50 translate-middle">
+      <div className="card-title">Sign Up</div>
+      <div className="card-body">
+        <form onSubmit={onSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-lable">
+              Email
+            </label>
+            <input
+              className="form-control"
+              id="email"
+              type="text"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="password" className="form-lable">
+              Password
+            </label>
+            <input
+              className="form-control"
+              id="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button className="btn btn-large btn-success">Signup</button>
+        </form>
+      </div>
+    </div>
   );
 };
 

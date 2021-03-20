@@ -50,18 +50,56 @@ const Header = ({
   }
 
   return (
-    <div>
-      {data.user.email && (
-        <Link to="/dashboard">{data.user.email}'s Dashboard</Link>
-      )}
-      {data.user.email && (
-        <Link to="/" onClick={(e) => onSignout()}>
-          Sign Out
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">
+          Graphql-React
         </Link>
-      )}
-      {!data.user.email && <Link to="/signup">Sign Up</Link>}
-      {!data.user.email && <Link to="/signin">Sign In</Link>}
-    </div>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            {data.user.email && (
+              <li className="nav-item">
+                <Link to="/dashboard" className="nav-link">
+                  {data.user.email}'s Dashboard
+                </Link>
+              </li>
+            )}
+            {data.user.email && (
+              <li className="nav-item">
+                <Link to="/" onClick={(e) => onSignout()} className="nav-link">
+                  Sign Out
+                </Link>
+              </li>
+            )}
+            {!data.user.email && (
+              <li className="nav-item">
+                <Link to="/signup" className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+            )}
+            {!data.user.email && (
+              <li className="nav-item">
+                <Link to="/signin" className="nav-link">
+                  Sign In
+                </Link>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 

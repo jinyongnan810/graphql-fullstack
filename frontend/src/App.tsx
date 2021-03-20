@@ -32,23 +32,25 @@ const App = () => {
           setSignedOut={() => setSignedIn(false)}
           setLoading={() => setLoading(false)}
         />
-        <Switch>
-          <Route path="/dashboard">
-            {!signedIn && !loading && <Redirect to="/" />}
-            <Dashboard />
-          </Route>
-          <Route path="/signup">
-            {signedIn && !loading && <Redirect to="/dashboard" />}
-            <Signup setSignedIn={setSignedIn} />
-          </Route>
-          <Route path="/signin">
-            {signedIn && !loading && <Redirect to="/dashboard" />}
-            <Signin setSignedIn={setSignedIn} />
-          </Route>
-          <Route path="/">
-            <Public />
-          </Route>
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route path="/dashboard">
+              {!signedIn && !loading && <Redirect to="/" />}
+              <Dashboard />
+            </Route>
+            <Route path="/signup">
+              {signedIn && !loading && <Redirect to="/dashboard" />}
+              <Signup setSignedIn={setSignedIn} />
+            </Route>
+            <Route path="/signin">
+              {signedIn && !loading && <Redirect to="/dashboard" />}
+              <Signin setSignedIn={setSignedIn} />
+            </Route>
+            <Route path="/">
+              <Public />
+            </Route>
+          </Switch>
+        </div>
       </BrowserRouter>
     </ApolloProvider>
   );

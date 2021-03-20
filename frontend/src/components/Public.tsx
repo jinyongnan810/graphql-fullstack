@@ -16,7 +16,11 @@ const Public = () => {
   if (error) {
     return <div>Loading failed:{error}</div>;
   }
-  return <div>{JSON.stringify(data)}</div>;
+  return (
+    <div className="card mt-2">
+      <div className="card-body">{JSON.stringify(data)}</div>
+    </div>
+  );
 };
 
 export default Public;
