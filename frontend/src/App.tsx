@@ -22,7 +22,19 @@ const App = () => {
   });
   const apolloClient = new ApolloClient({
     link,
-    cache: new InMemoryCache({}),
+    cache: new InMemoryCache({
+      typePolicies: {
+        UserType: {
+          keyFields: ["id"],
+        },
+        PublicDataType: {
+          keyFields: ["id"],
+        },
+        PrivateDataType: {
+          keyFields: ["id"],
+        },
+      },
+    }),
   });
   return (
     <ApolloProvider client={apolloClient}>
