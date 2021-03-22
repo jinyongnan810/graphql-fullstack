@@ -12,15 +12,17 @@ const signUpMutaion = gql`
 const Signup = ({ setSignedIn }: { setSignedIn: Function }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signUp, { error }] = useMutation(signUpMutaion);
+  const [signUp] = useMutation(signUpMutaion);
   const history = useHistory();
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    await signUp({
-      variables: { email: email.trim(), password: password.trim() },
-    });
-    if (error) {
-      throw new Error(error.message);
+    try {
+      await signUp({
+        variables: { email: email.trim(), password: password.trim() },
+      });
+    } catch (error) {
+      alert(error.message);
+      return;
     }
     setSignedIn(true);
     history.push("/dashboard");
