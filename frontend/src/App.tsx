@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
+import privateRoute from "./components/privateRoute";
 import Public from "./components/Public";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
@@ -15,6 +16,7 @@ import Signup from "./components/Signup";
 const App = () => {
   const [signedIn, setSignedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const DashboardPrivate = privateRoute(Dashboard);
 
   const link = createHttpLink({
     uri: "http://localhost:4000/graphql",
@@ -47,9 +49,11 @@ const App = () => {
         <div className="container">
           <Switch>
             <Route path="/dashboard">
-              {!signedIn && !loading && <Redirect to="/" />}
-              <Dashboard />
+              {/* {!signedIn && !loading && <Redirect to="/" />} */}
+              {/* <Dashboard /> */}
+              <DashboardPrivate loading={loading} signedIn={signedIn} />
             </Route>
+
             <Route path="/signup">
               {signedIn && !loading && <Redirect to="/dashboard" />}
               <Signup setSignedIn={setSignedIn} />
