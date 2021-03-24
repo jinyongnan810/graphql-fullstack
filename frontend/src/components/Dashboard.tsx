@@ -8,7 +8,7 @@ const getPrivateDataQuery = gql`
     }
   }
 `;
-const Dashboard = () => {
+const Dashboard = ({ testProp }: { testProp: String }) => {
   const { loading, error, data } = useQuery(getPrivateDataQuery);
   if (loading) {
     return <div>Loading private data...</div>;

@@ -51,7 +51,11 @@ const App = () => {
             <Route path="/dashboard">
               {/* {!signedIn && !loading && <Redirect to="/" />} */}
               {/* <Dashboard /> */}
-              <DashboardPrivate loading={loading} signedIn={signedIn} />
+              <DashboardPrivate
+                loading={loading}
+                signedIn={signedIn}
+                testProp="test"
+              />
             </Route>
 
             <Route path="/signup">
